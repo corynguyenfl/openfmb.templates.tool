@@ -1,5 +1,12 @@
 name: DEVICE_NAME
-polls: []
+polls:
+- name: integrity_poll
+  interval-ms: 1000
+  classes:
+    class0: true
+    class1: false
+    class2: false
+    class3: false
 channel:
   adapter: 0.0.0.0
   outstation-ip: 127.0.0.1
@@ -23,6 +30,7 @@ file:
   plugin: dnp3-master
 profiles:
 - name: ResourceStatusProfile
+  poll-name: integrity_poll
   mapping:
     statusMessageInfo:
       messageInfo:
@@ -1367,5 +1375,4 @@ profiles:
             string-field-type: mapped
           t:
             timestamp-field-type: ignored
-  poll-name: ignored
 ...

@@ -155,6 +155,11 @@ namespace OpenFMB.Templates.Tool
             }
             return null;
         }
+
+        public static bool IsControlProfile(string profileName)
+        {
+            return profileName.EndsWith("ControlProfile");
+        }
     }
 
     public class Module
