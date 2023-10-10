@@ -54,66 +54,59 @@ namespace OpenFMB.Templates.Tools.Configurations.Templates
 
             for (int i = 0; i < profiles.Count; i++)
             {
-                try
+                var p = profiles[i] as Dictionary<object, object>;
+                string profileName = p["name"].ToString();
+
+                var deviceInformation = config.DeviceIdentifier(i, profileName);
+
+                var deviceName = deviceInformation.Item1;
+                var deviceMrid = deviceInformation.Item2;
+
+                // Update mRID and name
+                var module = ProfileRegistry.GetModuleByProfileName(profileName);
+                var tag = ProfileRegistry.GetDeviceTagForModule(module.Name);
+                var mappings = p["mapping"] as Dictionary<object, object>;
+
+                if (tag.ToLower() == "conductingequipment")
                 {
-                    var p = profiles[i] as Dictionary<object, object>;
-                    string profileName = p["name"].ToString();
+                    var conductingEquipment = mappings["conductingEquipment"] as Dictionary<object, object>;
+                    var mrid = conductingEquipment["mRID"] as Dictionary<object, object>;
+                    mrid["value"] = deviceMrid;
 
-                    var deviceInformation = config.DeviceIdentifier(i, profileName);
-
-                    var deviceName = deviceInformation.Item1;
-                    var deviceMrid = deviceInformation.Item2;
-
-                    // Update mRID and name
-                    var module = ProfileRegistry.GetModuleByProfileName(profileName);
-                    var tag = ProfileRegistry.GetDeviceTagForModule(module.Name);
-                    var mappings = p["mapping"] as Dictionary<object, object>;
-
-                    if (tag.ToLower() == "conductingequipment")
-                    {
-                        var conductingEquipment = mappings["conductingEquipment"] as Dictionary<object, object>;
-                        var mrid = conductingEquipment["mRID"] as Dictionary<object, object>;
-                        mrid["value"] = deviceMrid;
-
-                        var nameObject = conductingEquipment["namedObject"] as Dictionary<object, object>;
-                        var name = nameObject["name"] as Dictionary<object, object>;
-                        var v = name["value"] as Dictionary<object, object>;
-                        v["value"] = deviceName;
-                    }
-                    else
-                    {
-                        var obj = mappings[tag] as Dictionary<object, object>;
-                        var conductingEquipment = obj["conductingEquipment"] as Dictionary<object, object>;
-                        var mrid = conductingEquipment["mRID"] as Dictionary<object, object>;
-                        mrid["value"] = deviceMrid;
-
-                        var nameObject = conductingEquipment["namedObject"] as Dictionary<object, object>;
-                        var name = nameObject["name"] as Dictionary<object, object>;
-                        var v = name["value"] as Dictionary<object, object>;
-                        v["value"] = deviceName;
-                    }
-
-                    // Update subject
-                    if (ProfileRegistry.IsControlProfile(profileName))
-                    {
-                        config.SubscribeTopics.Add(new Subscribe()
-                        {
-                            Profile = profileName,
-                            Subject = deviceMrid
-                        });
-                    }
-                    else
-                    {
-                        config.PublishTopics.Add(new Publish()
-                        {
-                            Profile = profileName,
-                            Subject = deviceMrid
-                        });
-                    }
+                    var nameObject = conductingEquipment["namedObject"] as Dictionary<object, object>;
+                    var name = nameObject["name"] as Dictionary<object, object>;
+                    var v = name["value"] as Dictionary<object, object>;
+                    v["value"] = deviceName;
                 }
-                catch (Exception ex)
+                else
                 {
-                    Console.WriteLine(ex.Message);
+                    var obj = mappings[tag] as Dictionary<object, object>;
+                    var conductingEquipment = obj["conductingEquipment"] as Dictionary<object, object>;
+                    var mrid = conductingEquipment["mRID"] as Dictionary<object, object>;
+                    mrid["value"] = deviceMrid;
+
+                    var nameObject = conductingEquipment["namedObject"] as Dictionary<object, object>;
+                    var name = nameObject["name"] as Dictionary<object, object>;
+                    var v = name["value"] as Dictionary<object, object>;
+                    v["value"] = deviceName;
+                }
+
+                // Update subject
+                if (ProfileRegistry.IsControlProfile(profileName))
+                {
+                    config.SubscribeTopics.Add(new Subscribe()
+                    {
+                        Profile = profileName,
+                        Subject = deviceMrid
+                    });
+                }
+                else
+                {
+                    config.PublishTopics.Add(new Publish()
+                    {
+                        Profile = profileName,
+                        Subject = deviceMrid
+                    });
                 }
             }
 

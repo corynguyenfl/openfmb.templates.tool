@@ -62,52 +62,6 @@ namespace OpenFMB.Templates.Tools.Configurations.Plugins
 
             return node;
         }
-
-        public void FromYaml(YamlNode yamlNode)
-        {
-            YamlMappingNode node = yamlNode as YamlMappingNode;
-            Enabled = (node["enabled"] as YamlScalarNode).Value == "true";
-            MaxQueuedMessages = Convert.ToInt32((node["max-queued-messages"] as YamlScalarNode).Value);
-            ConnectUrl = (node["connect-url"] as YamlScalarNode).Value;
-            ConnectRetrySeconds = Convert.ToInt32((node["connect-retry-seconds"] as YamlScalarNode).Value);
-
-            if (node.GetValueByKey("security") is YamlMappingNode security)
-            {
-                try
-                {
-                    Security.SecurityType = (SecurityType)Enum.Parse(typeof(SecurityType), (security["security-type"] as YamlScalarNode)?.Value);
-                    Security.CertFile = (security["ca-trusted-cert-file"] as YamlScalarNode)?.Value;
-                    Security.ClientKey = (security["client-private-key-file"] as YamlScalarNode)?.Value;
-                    Security.ClientCert = (security["client-cert-chain-file"] as YamlScalarNode)?.Value;
-                    Security.JwtCredsFile = (security["jwt-creds-file"] as YamlScalarNode)?.Value;
-                }
-                catch { }
-            }
-
-            Publishes.Clear();
-
-            var publishes = node["publish"] as YamlSequenceNode;
-            foreach (YamlMappingNode p in publishes.Cast<YamlMappingNode>())
-            {
-                Publishes.Add(new Publish()
-                {
-                    Profile = (p["profile"] as YamlScalarNode).Value,
-                    Subject = (p["subject"] as YamlScalarNode).Value
-                });
-            }
-
-            Subscribes.Clear();
-
-            var subscribes = node["subscribe"] as YamlSequenceNode;
-            foreach (YamlMappingNode p in subscribes.Cast<YamlMappingNode>())
-            {
-                Subscribes.Add(new Subscribe()
-                {
-                    Profile = (p["profile"] as YamlScalarNode).Value,
-                    Subject = (p["subject"] as YamlScalarNode).Value
-                });
-            }
-        }
     }
 
     public class NatsSecurity
