@@ -35,7 +35,7 @@ namespace openfmb.templates.tool.Configurations.Templates
         {
             // Determine protocol
             var protocol = Protocol.DNP3;
-            if (dic.TryGetValue("auto_polling", out object _value))
+            if (dic.TryGetValue("auto_polling", out _))
             {
                 protocol = Protocol.MODBUS;
             }
@@ -119,15 +119,13 @@ namespace openfmb.templates.tool.Configurations.Templates
 
             var stream = GetYamlStream(dic);
 
-            using (var writer = new StringWriter())
-            {
-                stream.Save(writer, assignAnchors: false);
+            using var writer = new StringWriter();
+            stream.Save(writer, assignAnchors: false);
 
-                // Replace
-                var s = writer.ToString().Replace("\r\n", "\n");
-                File.WriteAllText("output.yaml", s);
-                return s;
-            }
+            // Replace
+            var s = writer.ToString().Replace("\r\n", "\n");
+            File.WriteAllText("output.yaml", s);
+            return s;
         }
 
         static YamlStream GetYamlStream(Dictionary<object, object> jsonDict)

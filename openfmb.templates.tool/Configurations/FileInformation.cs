@@ -4,7 +4,7 @@ namespace openfmb.templates.tool.Configurations
 {
     public class FileInformation
     {
-        public YamlNode ToYaml()
+        public static YamlNode ToYaml()
         {
             var node = new YamlMappingNode
             {

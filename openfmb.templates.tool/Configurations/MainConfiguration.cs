@@ -5,8 +5,6 @@ namespace openfmb.templates.tool.Configurations
 {
     public class MainConfiguration
     {
-        public FileInformation FileInformation { get; set; } = new FileInformation();
-
         public LoggingSection Logging { get; } = new LoggingSection();
 
         public PluginsSection Plugins { get; } = new PluginsSection();
@@ -15,8 +13,10 @@ namespace openfmb.templates.tool.Configurations
         {
             if (parameters.Protocol == Protocol.DNP3)
             {
-                var plugin = new Dnp3MasterPlugin();
-                plugin.Enabled = true;
+                var plugin = new Dnp3MasterPlugin
+                {
+                    Enabled = true
+                };
                 plugin.Sessions.Add(new Session(PluginsSection.Dnp3Master)
                 {
                     Name = "session1",
@@ -26,8 +26,10 @@ namespace openfmb.templates.tool.Configurations
             }
             else if (parameters.Protocol == Protocol.MODBUS)
             {
-                var plugin = new ModbusMasterPlugin();
-                plugin.Enabled = true;
+                var plugin = new ModbusMasterPlugin
+                {
+                    Enabled = true
+                };
                 plugin.Sessions.Add(new Session(PluginsSection.ModbusMaster)
                 {
                     Name = "session1",
@@ -38,8 +40,10 @@ namespace openfmb.templates.tool.Configurations
 
             if (parameters.TransportProtocol == TransportProtocol.NATS)
             {
-                var natsPlugin = new NatsPlugin();
-                natsPlugin.ConnectUrl = parameters.NatsUrl;
+                var natsPlugin = new NatsPlugin
+                {
+                    ConnectUrl = parameters.NatsUrl
+                };
                 natsPlugin.Security.JwtCredsFile = parameters.NatsJwtCredsFile;
                 natsPlugin.Publishes.AddRange(parameters.PublishTopics);
                 natsPlugin.Subscribes.AddRange(parameters.SubscribeTopics);
@@ -47,8 +51,10 @@ namespace openfmb.templates.tool.Configurations
             }
             else if (parameters.TransportProtocol == TransportProtocol.MQTT)
             {
-                var mqttPlugin = new MqttPlugin();
-                mqttPlugin.ConnectUrl = parameters.MqttUrl;
+                var mqttPlugin = new MqttPlugin
+                {
+                    ConnectUrl = parameters.MqttUrl
+                };
                 mqttPlugin.Security.Username = parameters.MqttUsername;
                 mqttPlugin.Security.Password = parameters.MqttPassword;
                 mqttPlugin.Publishes.AddRange(parameters.PublishTopics);
@@ -66,7 +72,7 @@ namespace openfmb.templates.tool.Configurations
             stream.Add(doc);
 
             // file info            
-            root.Add("File", FileInformation.ToYaml());
+            root.Add("file", FileInformation.ToYaml());
 
             // Logging            
             root.Add(Logging.Name, Logging.ToYaml());
@@ -80,14 +86,12 @@ namespace openfmb.templates.tool.Configurations
         public string Generate()
         {
             var stream = GetYamlStream();
-            using (var writer = new StringWriter())
-            {
-                stream.Save(writer, assignAnchors: false);
+            using var writer = new StringWriter();
+            stream.Save(writer, assignAnchors: false);
 
-                // Replace
-                var s = writer.ToString().Replace("\r\n", "\n");
-                return s;
-            }
+            // Replace
+            var s = writer.ToString().Replace("\r\n", "\n");
+            return s;
         }
     }
 }

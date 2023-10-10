@@ -29,8 +29,8 @@ namespace openfmb.templates.tool
 
         public Tuple<string, string> DeviceIdentifier(int index, string profileName)
         {
-            string name = index < DeviceNames.Count ? DeviceNames[index] : DeviceNames[DeviceNames.Count - 1];
-            string mrid = index < DeviceMrids.Count ? DeviceMrids[index] : DeviceMrids[DeviceMrids.Count - 1];
+            string name = index < DeviceNames.Count ? DeviceNames[index] : DeviceNames[^1];
+            string mrid = index < DeviceMrids.Count ? DeviceMrids[index] : DeviceMrids[^1];
 
             if (ProfileRegistry.IsControlProfile(profileName))
             {

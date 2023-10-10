@@ -4,16 +4,18 @@ namespace openfmb.templates.tool
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             TestGenerateConfigs();
         }
 
         static void TestGenerateConfigs()
         {
-            var config = new Parameters();
-            config.DevicePort = 12345;
-            config.DeviceMrids = new List<string>() { Guid.NewGuid().ToString().ToLower() };
+            var config = new Parameters
+            {
+                DevicePort = 12345,
+                DeviceMrids = new List<string>() { Guid.NewGuid().ToString().ToLower() }
+            };
 
             foreach (var f in Directory.GetFiles("templates", "*.yaml"))
             {
