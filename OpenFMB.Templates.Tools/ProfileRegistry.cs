@@ -7,10 +7,10 @@ namespace OpenFMB.Templates.Tool
 {
     public static class ProfileRegistry
     {
-        public static readonly Dictionary<string, MessageDescriptor> Profiles = new Dictionary<string, MessageDescriptor>();
-        public static readonly Dictionary<string, string> ProfileDeviceTagMap = new Dictionary<string, string>();
+        public static readonly Dictionary<string, MessageDescriptor> Profiles = new();
+        public static readonly Dictionary<string, string> ProfileDeviceTagMap = new();
 
-        public static readonly List<Module> Modules = new List<Module>();
+        public static readonly List<Module> Modules = new();
 
         static ProfileRegistry()
         {
@@ -53,8 +53,7 @@ namespace OpenFMB.Templates.Tool
                             }
                             m.Profiles.Add(t.Name);
 
-                            string tag;
-                            if (!ProfileDeviceTagMap.TryGetValue(module, out tag))
+                            if (!ProfileDeviceTagMap.TryGetValue(module, out string tag))
                             {
                                 foreach (var f in descriptor.Fields.InFieldNumberOrder())
                                 {
@@ -110,8 +109,7 @@ namespace OpenFMB.Templates.Tool
 
         public static string GetProfileFullName(string profileName)
         {
-            MessageDescriptor descriptor;
-            if (Profiles.TryGetValue(profileName, out descriptor))
+            if (Profiles.TryGetValue(profileName, out MessageDescriptor descriptor))
             {
                 return descriptor.ClrType.FullName;
             }
@@ -124,8 +122,7 @@ namespace OpenFMB.Templates.Tool
         public static string GetDeviceTagForProfile(string profileName)
         {
             string deviceName = null;
-            MessageDescriptor descriptor;
-            if (Profiles.TryGetValue(profileName, out descriptor))
+            if (Profiles.TryGetValue(profileName, out MessageDescriptor descriptor))
             {
                 var module = descriptor.FullName.Split('.')[0];
                 ProfileDeviceTagMap.TryGetValue(module, out deviceName);
@@ -136,8 +133,7 @@ namespace OpenFMB.Templates.Tool
 
         public static string GetDeviceTagForModule(string module)
         {
-            string tag = string.Empty;
-            ProfileDeviceTagMap.TryGetValue(module, out tag);
+            ProfileDeviceTagMap.TryGetValue(module, out string tag);
             return tag;
         }
 
@@ -154,6 +150,11 @@ namespace OpenFMB.Templates.Tool
                 }
             }
             return null;
+        }
+
+        public static bool IsControlProfile(string profileName)
+        {
+            return profileName.EndsWith("ControlProfile");
         }
     }
 
