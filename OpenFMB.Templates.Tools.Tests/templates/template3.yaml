@@ -1,0 +1,1378 @@
+name: DEVICE_NAME
+polls:
+- name: integrity_poll
+  interval-ms: 1000
+  classes:
+    class0: true
+    class1: false
+    class2: false
+    class3: false
+channel:
+  adapter: 0.0.0.0
+  outstation-ip: 127.0.0.1
+  port: 20000
+protocol:
+  master-address: 1
+  outstation-address: 10
+  startup-integrity:
+    class0: false
+    class1: false
+    class2: false
+    class3: false
+  unsolicited:
+    class1: false
+    class2: false
+    class3: false
+file:
+  id: openfmb-adapter-template
+  edition: 2.0
+  version: 1.0.0.0
+  plugin: dnp3-master
+profiles:
+- name: ResourceStatusProfile
+  poll-name: integrity_poll
+  mapping:
+    statusMessageInfo:
+      messageInfo:
+        identifiedObject:
+          description:
+            value:
+              string-field-type: ignored
+          mRID:
+            value:
+              string-field-type: generated_uuid
+          name:
+            value:
+              string-field-type: ignored
+        messageTimeStamp:
+          timestamp-field-type: message
+    conductingEquipment:
+      namedObject:
+        description:
+          value:
+            string-field-type: ignored
+        name:
+          value:
+            string-field-type: constant
+            value: DEVICE_NAME
+      mRID:
+        string-field-type: primary_uuid
+        value: 00000000-0000-0000-0000-000000000000
+    ied:
+      identifiedObject:
+        description:
+          value:
+            string-field-type: ignored
+        mRID:
+          value:
+            string-field-type: ignored
+        name:
+          value:
+            string-field-type: ignored
+    resourceStatus:
+      identifiedObject:
+        description:
+          value:
+            string-field-type: ignored
+        mRID:
+          value:
+            string-field-type: ignored
+        name:
+          value:
+            string-field-type: ignored
+      analogeventandstatusggio:
+      - logicalNode:
+          identifiedObject:
+            description:
+              value:
+                string-field-type: constant
+                value: Line 2 voltage setpoint
+            mRID:
+              value:
+                string-field-type: ignored
+            name:
+              value:
+                string-field-type: constant
+                value: L2_setpointRMS
+        AnIn:
+          mag:
+            double-field-type: mapped
+            source-type: analog
+            index: 3
+            scale: 1
+          q:
+            quality-field-type: ignored
+          t:
+            timestamp-field-type: ignored
+          units:
+            multiplier:
+              value:
+                enum-field-type: ignored
+            SIUnit:
+              enum-field-type: constant
+              value: UnitSymbolKind_V
+        Phase:
+          value:
+            enum-field-type: ignored
+      - logicalNode:
+          identifiedObject:
+            description:
+              value:
+                string-field-type: constant
+                value: Line 1 voltage setpoint
+            mRID:
+              value:
+                string-field-type: ignored
+            name:
+              value:
+                string-field-type: constant
+                value: L1_setpointRMS
+        AnIn:
+          mag:
+            double-field-type: mapped
+            source-type: analog
+            index: 4
+            scale: 1
+          q:
+            quality-field-type: ignored
+          t:
+            timestamp-field-type: ignored
+          units:
+            multiplier:
+              value:
+                enum-field-type: ignored
+            SIUnit:
+              enum-field-type: constant
+              value: UnitSymbolKind_V
+        Phase:
+          value:
+            enum-field-type: ignored
+      - logicalNode:
+          identifiedObject:
+            description:
+              value:
+                string-field-type: constant
+                value: Line1-Line2 voltage at GER Source
+            mRID:
+              value:
+                string-field-type: ignored
+            name:
+              value:
+                string-field-type: constant
+                value: Source_240VacRMS
+        AnIn:
+          mag:
+            double-field-type: mapped
+            source-type: analog
+            index: 5
+            scale: 1
+          q:
+            quality-field-type: ignored
+          t:
+            timestamp-field-type: ignored
+          units:
+            multiplier:
+              value:
+                enum-field-type: ignored
+            SIUnit:
+              enum-field-type: constant
+              value: UnitSymbolKind_V
+        Phase:
+          value:
+            enum-field-type: ignored
+      - logicalNode:
+          identifiedObject:
+            description:
+              value:
+                string-field-type: constant
+                value: Source 2 Line-Neutral Voltage
+            mRID:
+              value:
+                string-field-type: ignored
+            name:
+              value:
+                string-field-type: constant
+                value: S2_VacRMS
+        AnIn:
+          mag:
+            double-field-type: mapped
+            source-type: analog
+            index: 6
+            scale: 1
+          q:
+            quality-field-type: ignored
+          t:
+            timestamp-field-type: ignored
+          units:
+            multiplier:
+              value:
+                enum-field-type: ignored
+            SIUnit:
+              enum-field-type: constant
+              value: UnitSymbolKind_V
+        Phase:
+          value:
+            enum-field-type: ignored
+      - logicalNode:
+          identifiedObject:
+            description:
+              value:
+                string-field-type: constant
+                value: Source 1 Line-Neutral Voltage
+            mRID:
+              value:
+                string-field-type: ignored
+            name:
+              value:
+                string-field-type: constant
+                value: S1_VacRMS
+        AnIn:
+          mag:
+            double-field-type: mapped
+            source-type: analog
+            index: 7
+            scale: 1
+          q:
+            quality-field-type: ignored
+          t:
+            timestamp-field-type: ignored
+          units:
+            multiplier:
+              value:
+                enum-field-type: ignored
+            SIUnit:
+              enum-field-type: constant
+              value: UnitSymbolKind_V
+        Phase:
+          value:
+            enum-field-type: ignored
+      - logicalNode:
+          identifiedObject:
+            description:
+              value:
+                string-field-type: constant
+                value: Load 2 Line-Neutral Voltage
+            mRID:
+              value:
+                string-field-type: ignored
+            name:
+              value:
+                string-field-type: constant
+                value: L2_VacRMS
+        AnIn:
+          mag:
+            double-field-type: mapped
+            source-type: analog
+            index: 8
+            scale: 1
+          q:
+            quality-field-type: ignored
+          t:
+            timestamp-field-type: ignored
+          units:
+            multiplier:
+              value:
+                enum-field-type: ignored
+            SIUnit:
+              enum-field-type: constant
+              value: UnitSymbolKind_V
+        Phase:
+          value:
+            enum-field-type: ignored
+      - logicalNode:
+          identifiedObject:
+            description:
+              value:
+                string-field-type: constant
+                value: Load 1 Line-Neutral Voltage
+            mRID:
+              value:
+                string-field-type: ignored
+            name:
+              value:
+                string-field-type: constant
+                value: L1_VacRMS
+        AnIn:
+          mag:
+            double-field-type: mapped
+            source-type: analog
+            index: 9
+            scale: 1
+          q:
+            quality-field-type: ignored
+          t:
+            timestamp-field-type: ignored
+          units:
+            multiplier:
+              value:
+                enum-field-type: ignored
+            SIUnit:
+              enum-field-type: constant
+              value: UnitSymbolKind_V
+        Phase:
+          value:
+            enum-field-type: ignored
+      - logicalNode:
+          identifiedObject:
+            description:
+              value:
+                string-field-type: constant
+                value: DC Bus Voltage
+            mRID:
+              value:
+                string-field-type: ignored
+            name:
+              value:
+                string-field-type: constant
+                value: DC_Link
+        AnIn:
+          mag:
+            double-field-type: mapped
+            source-type: analog
+            index: 10
+            scale: 1
+          q:
+            quality-field-type: ignored
+          t:
+            timestamp-field-type: ignored
+          units:
+            multiplier:
+              value:
+                enum-field-type: ignored
+            SIUnit:
+              enum-field-type: constant
+              value: UnitSymbolKind_V
+        Phase:
+          value:
+            enum-field-type: ignored
+      - logicalNode:
+          identifiedObject:
+            description:
+              value:
+                string-field-type: constant
+                value: Rectifier Current
+            mRID:
+              value:
+                string-field-type: ignored
+            name:
+              value:
+                string-field-type: constant
+                value: Rect_240IacRMS
+        AnIn:
+          mag:
+            double-field-type: mapped
+            source-type: analog
+            index: 11
+            scale: 1
+          q:
+            quality-field-type: ignored
+          t:
+            timestamp-field-type: ignored
+          units:
+            multiplier:
+              value:
+                enum-field-type: ignored
+            SIUnit:
+              enum-field-type: constant
+              value: UnitSymbolKind_Amp
+        Phase:
+          value:
+            enum-field-type: ignored
+      - logicalNode:
+          identifiedObject:
+            description:
+              value:
+                string-field-type: constant
+                value: Line 2 Load Current
+            mRID:
+              value:
+                string-field-type: ignored
+            name:
+              value:
+                string-field-type: constant
+                value: L2_IacRMS
+        AnIn:
+          mag:
+            double-field-type: mapped
+            source-type: analog
+            index: 12
+            scale: 1
+          q:
+            quality-field-type: ignored
+          t:
+            timestamp-field-type: ignored
+          units:
+            multiplier:
+              value:
+                enum-field-type: ignored
+            SIUnit:
+              enum-field-type: constant
+              value: UnitSymbolKind_Amp
+        Phase:
+          value:
+            enum-field-type: ignored
+      - logicalNode:
+          identifiedObject:
+            description:
+              value:
+                string-field-type: constant
+                value: Line 1 Load Current
+            mRID:
+              value:
+                string-field-type: ignored
+            name:
+              value:
+                string-field-type: constant
+                value: L1_IacRMS
+        AnIn:
+          mag:
+            double-field-type: mapped
+            source-type: analog
+            index: 13
+            scale: 1
+          q:
+            quality-field-type: ignored
+          t:
+            timestamp-field-type: ignored
+          units:
+            multiplier:
+              value:
+                enum-field-type: ignored
+            SIUnit:
+              enum-field-type: constant
+              value: UnitSymbolKind_Amp
+        Phase:
+          value:
+            enum-field-type: ignored
+      - logicalNode:
+          identifiedObject:
+            description:
+              value:
+                string-field-type: constant
+                value: Source 2 (Real) Active Power
+            mRID:
+              value:
+                string-field-type: ignored
+            name:
+              value:
+                string-field-type: constant
+                value: S2_ActPwr_P
+        AnIn:
+          mag:
+            double-field-type: mapped
+            source-type: analog
+            index: 14
+            scale: 1
+          q:
+            quality-field-type: ignored
+          t:
+            timestamp-field-type: ignored
+          units:
+            multiplier:
+              value:
+                enum-field-type: ignored
+            SIUnit:
+              enum-field-type: constant
+              value: UnitSymbolKind_W
+        Phase:
+          value:
+            enum-field-type: ignored
+      - logicalNode:
+          identifiedObject:
+            description:
+              value:
+                string-field-type: constant
+                value: Source 2 Reactive Power
+            mRID:
+              value:
+                string-field-type: ignored
+            name:
+              value:
+                string-field-type: constant
+                value: S2_ReactPwr_Q
+        AnIn:
+          mag:
+            double-field-type: mapped
+            source-type: analog
+            index: 15
+            scale: 1
+          q:
+            quality-field-type: ignored
+          t:
+            timestamp-field-type: ignored
+          units:
+            multiplier:
+              value:
+                enum-field-type: ignored
+            SIUnit:
+              enum-field-type: constant
+              value: UnitSymbolKind_VAr
+        Phase:
+          value:
+            enum-field-type: ignored
+      - logicalNode:
+          identifiedObject:
+            description:
+              value:
+                string-field-type: constant
+                value: Source 2 Apparent Power
+            mRID:
+              value:
+                string-field-type: ignored
+            name:
+              value:
+                string-field-type: constant
+                value: S2_AppPwr_S
+        AnIn:
+          mag:
+            double-field-type: mapped
+            source-type: analog
+            index: 16
+            scale: 1
+          q:
+            quality-field-type: ignored
+          t:
+            timestamp-field-type: ignored
+          units:
+            multiplier:
+              value:
+                enum-field-type: ignored
+            SIUnit:
+              enum-field-type: constant
+              value: UnitSymbolKind_VA
+        Phase:
+          value:
+            enum-field-type: ignored
+      - logicalNode:
+          identifiedObject:
+            description:
+              value:
+                string-field-type: constant
+                value: Source 2 Power Factor
+            mRID:
+              value:
+                string-field-type: ignored
+            name:
+              value:
+                string-field-type: constant
+                value: S2_PF
+        AnIn:
+          mag:
+            double-field-type: mapped
+            source-type: analog
+            index: 17
+            scale: 1
+          q:
+            quality-field-type: ignored
+          t:
+            timestamp-field-type: ignored
+          units:
+            multiplier:
+              value:
+                enum-field-type: ignored
+            SIUnit:
+              enum-field-type: ignored
+        Phase:
+          value:
+            enum-field-type: ignored
+      - logicalNode:
+          identifiedObject:
+            description:
+              value:
+                string-field-type: constant
+                value: Load 2 (Real) Active Power
+            mRID:
+              value:
+                string-field-type: ignored
+            name:
+              value:
+                string-field-type: constant
+                value: L2_ActPwr_P
+        AnIn:
+          mag:
+            double-field-type: mapped
+            source-type: analog
+            index: 18
+            scale: 1
+          q:
+            quality-field-type: ignored
+          t:
+            timestamp-field-type: ignored
+          units:
+            multiplier:
+              value:
+                enum-field-type: ignored
+            SIUnit:
+              enum-field-type: constant
+              value: UnitSymbolKind_W
+        Phase:
+          value:
+            enum-field-type: ignored
+      - logicalNode:
+          identifiedObject:
+            description:
+              value:
+                string-field-type: constant
+                value: Load 2 Reactive Power
+            mRID:
+              value:
+                string-field-type: ignored
+            name:
+              value:
+                string-field-type: constant
+                value: L2_ReactPwr_Q
+        AnIn:
+          mag:
+            double-field-type: mapped
+            source-type: analog
+            index: 19
+            scale: 1
+          q:
+            quality-field-type: ignored
+          t:
+            timestamp-field-type: ignored
+          units:
+            multiplier:
+              value:
+                enum-field-type: ignored
+            SIUnit:
+              enum-field-type: constant
+              value: UnitSymbolKind_VAr
+        Phase:
+          value:
+            enum-field-type: ignored
+      - logicalNode:
+          identifiedObject:
+            description:
+              value:
+                string-field-type: constant
+                value: Load 2 Apparent Power
+            mRID:
+              value:
+                string-field-type: ignored
+            name:
+              value:
+                string-field-type: constant
+                value: L2_AppPwr_S
+        AnIn:
+          mag:
+            double-field-type: mapped
+            source-type: analog
+            index: 20
+            scale: 1
+          q:
+            quality-field-type: ignored
+          t:
+            timestamp-field-type: ignored
+          units:
+            multiplier:
+              value:
+                enum-field-type: ignored
+            SIUnit:
+              enum-field-type: constant
+              value: UnitSymbolKind_VA
+        Phase:
+          value:
+            enum-field-type: ignored
+      - logicalNode:
+          identifiedObject:
+            description:
+              value:
+                string-field-type: constant
+                value: Load 2 Power Factor
+            mRID:
+              value:
+                string-field-type: ignored
+            name:
+              value:
+                string-field-type: constant
+                value: L2_PF
+        AnIn:
+          mag:
+            double-field-type: mapped
+            source-type: analog
+            index: 21
+            scale: 1
+          q:
+            quality-field-type: ignored
+          t:
+            timestamp-field-type: ignored
+          units:
+            multiplier:
+              value:
+                enum-field-type: ignored
+            SIUnit:
+              enum-field-type: ignored
+        Phase:
+          value:
+            enum-field-type: ignored
+      - logicalNode:
+          identifiedObject:
+            description:
+              value:
+                string-field-type: constant
+                value: Source 1 (Real) Active Power
+            mRID:
+              value:
+                string-field-type: ignored
+            name:
+              value:
+                string-field-type: constant
+                value: S1_ActPwr_P
+        AnIn:
+          mag:
+            double-field-type: mapped
+            source-type: analog
+            index: 22
+            scale: 1
+          q:
+            quality-field-type: ignored
+          t:
+            timestamp-field-type: ignored
+          units:
+            multiplier:
+              value:
+                enum-field-type: ignored
+            SIUnit:
+              enum-field-type: constant
+              value: UnitSymbolKind_W
+        Phase:
+          value:
+            enum-field-type: ignored
+      - logicalNode:
+          identifiedObject:
+            description:
+              value:
+                string-field-type: constant
+                value: Source 1 Reactive Power
+            mRID:
+              value:
+                string-field-type: ignored
+            name:
+              value:
+                string-field-type: constant
+                value: S1_ReactPwr_Q
+        AnIn:
+          mag:
+            double-field-type: mapped
+            source-type: analog
+            index: 23
+            scale: 1
+          q:
+            quality-field-type: ignored
+          t:
+            timestamp-field-type: ignored
+          units:
+            multiplier:
+              value:
+                enum-field-type: ignored
+            SIUnit:
+              enum-field-type: constant
+              value: UnitSymbolKind_VAr
+        Phase:
+          value:
+            enum-field-type: ignored
+      - logicalNode:
+          identifiedObject:
+            description:
+              value:
+                string-field-type: constant
+                value: Source 1 Apparent Power
+            mRID:
+              value:
+                string-field-type: ignored
+            name:
+              value:
+                string-field-type: constant
+                value: S1_AppPwr_S
+        AnIn:
+          mag:
+            double-field-type: mapped
+            source-type: analog
+            index: 24
+            scale: 1
+          q:
+            quality-field-type: ignored
+          t:
+            timestamp-field-type: ignored
+          units:
+            multiplier:
+              value:
+                enum-field-type: ignored
+            SIUnit:
+              enum-field-type: constant
+              value: UnitSymbolKind_VA
+        Phase:
+          value:
+            enum-field-type: ignored
+      - logicalNode:
+          identifiedObject:
+            description:
+              value:
+                string-field-type: constant
+                value: Source 1 Power Factor
+            mRID:
+              value:
+                string-field-type: ignored
+            name:
+              value:
+                string-field-type: constant
+                value: S1_PF
+        AnIn:
+          mag:
+            double-field-type: mapped
+            source-type: analog
+            index: 25
+            scale: 1
+          q:
+            quality-field-type: ignored
+          t:
+            timestamp-field-type: ignored
+          units:
+            multiplier:
+              value:
+                enum-field-type: ignored
+            SIUnit:
+              enum-field-type: ignored
+        Phase:
+          value:
+            enum-field-type: ignored
+      - logicalNode:
+          identifiedObject:
+            description:
+              value:
+                string-field-type: constant
+                value: Load 1 (Real) Active Power
+            mRID:
+              value:
+                string-field-type: ignored
+            name:
+              value:
+                string-field-type: constant
+                value: L1_Actpwr_P
+        AnIn:
+          mag:
+            double-field-type: mapped
+            source-type: analog
+            index: 26
+            scale: 1
+          q:
+            quality-field-type: ignored
+          t:
+            timestamp-field-type: ignored
+          units:
+            multiplier:
+              value:
+                enum-field-type: ignored
+            SIUnit:
+              enum-field-type: constant
+              value: UnitSymbolKind_W
+        Phase:
+          value:
+            enum-field-type: ignored
+      - logicalNode:
+          identifiedObject:
+            description:
+              value:
+                string-field-type: constant
+                value: Load 1 Reactive Power
+            mRID:
+              value:
+                string-field-type: ignored
+            name:
+              value:
+                string-field-type: constant
+                value: L1_ReactPwr_Q
+        AnIn:
+          mag:
+            double-field-type: mapped
+            source-type: analog
+            index: 27
+            scale: 1
+          q:
+            quality-field-type: ignored
+          t:
+            timestamp-field-type: ignored
+          units:
+            multiplier:
+              value:
+                enum-field-type: ignored
+            SIUnit:
+              enum-field-type: constant
+              value: UnitSymbolKind_VAr
+        Phase:
+          value:
+            enum-field-type: ignored
+      - logicalNode:
+          identifiedObject:
+            description:
+              value:
+                string-field-type: constant
+                value: Load 1 Apparent Power
+            mRID:
+              value:
+                string-field-type: ignored
+            name:
+              value:
+                string-field-type: constant
+                value: L1_AppPwr_S
+        AnIn:
+          mag:
+            double-field-type: mapped
+            source-type: analog
+            index: 28
+            scale: 1
+          q:
+            quality-field-type: ignored
+          t:
+            timestamp-field-type: ignored
+          units:
+            multiplier:
+              value:
+                enum-field-type: ignored
+            SIUnit:
+              enum-field-type: constant
+              value: UnitSymbolKind_VA
+        Phase:
+          value:
+            enum-field-type: ignored
+      - logicalNode:
+          identifiedObject:
+            description:
+              value:
+                string-field-type: constant
+                value: Load 1 Power Factor
+            mRID:
+              value:
+                string-field-type: ignored
+            name:
+              value:
+                string-field-type: constant
+                value: L1_PF
+        AnIn:
+          mag:
+            double-field-type: mapped
+            source-type: analog
+            index: 29
+            scale: 1
+          q:
+            quality-field-type: ignored
+          t:
+            timestamp-field-type: ignored
+          units:
+            multiplier:
+              value:
+                enum-field-type: ignored
+            SIUnit:
+              enum-field-type: ignored
+        Phase:
+          value:
+            enum-field-type: ignored
+      - logicalNode:
+          identifiedObject:
+            description:
+              value:
+                string-field-type: constant
+                value: Line 2 Source Current
+            mRID:
+              value:
+                string-field-type: ignored
+            name:
+              value:
+                string-field-type: constant
+                value: S2_IacRMS
+        AnIn:
+          mag:
+            double-field-type: mapped
+            source-type: analog
+            index: 35
+            scale: 1
+          q:
+            quality-field-type: ignored
+          t:
+            timestamp-field-type: ignored
+          units:
+            multiplier:
+              value:
+                enum-field-type: ignored
+            SIUnit:
+              enum-field-type: constant
+              value: UnitSymbolKind_Amp
+        Phase:
+          value:
+            enum-field-type: ignored
+      - logicalNode:
+          identifiedObject:
+            description:
+              value:
+                string-field-type: constant
+                value: Line 1 Source Current
+            mRID:
+              value:
+                string-field-type: ignored
+            name:
+              value:
+                string-field-type: constant
+                value: S1_IacRMS
+        AnIn:
+          mag:
+            double-field-type: mapped
+            source-type: analog
+            index: 36
+            scale: 1
+          q:
+            quality-field-type: ignored
+          t:
+            timestamp-field-type: ignored
+          units:
+            multiplier:
+              value:
+                enum-field-type: ignored
+            SIUnit:
+              enum-field-type: constant
+              value: UnitSymbolKind_Amp
+        Phase:
+          value:
+            enum-field-type: ignored
+      - logicalNode:
+          identifiedObject:
+            description:
+              value:
+                string-field-type: constant
+                value: Line1-Line2 Load Voltage
+            mRID:
+              value:
+                string-field-type: ignored
+            name:
+              value:
+                string-field-type: constant
+                value: Load_240VacRMS
+        AnIn:
+          mag:
+            double-field-type: mapped
+            source-type: analog
+            index: 37
+            scale: 1
+          q:
+            quality-field-type: ignored
+          t:
+            timestamp-field-type: ignored
+          units:
+            multiplier:
+              value:
+                enum-field-type: ignored
+            SIUnit:
+              enum-field-type: constant
+              value: UnitSymbolKind_V
+        Phase:
+          value:
+            enum-field-type: ignored
+      - logicalNode:
+          identifiedObject:
+            description:
+              value:
+                string-field-type: constant
+                value: Temperature Sensor Boost L Top
+            mRID:
+              value:
+                string-field-type: ignored
+            name:
+              value:
+                string-field-type: constant
+                value: Temp_Boost_L_Top
+        AnIn:
+          mag:
+            double-field-type: mapped
+            source-type: analog
+            index: 38
+            scale: 1
+          q:
+            quality-field-type: ignored
+          t:
+            timestamp-field-type: ignored
+          units:
+            multiplier:
+              value:
+                enum-field-type: ignored
+            SIUnit:
+              enum-field-type: constant
+              value: UnitSymbolKind_degC
+        Phase:
+          value:
+            enum-field-type: ignored
+      - logicalNode:
+          identifiedObject:
+            description:
+              value:
+                string-field-type: constant
+                value: Temperature Sensor Heat Sink Middle
+            mRID:
+              value:
+                string-field-type: ignored
+            name:
+              value:
+                string-field-type: constant
+                value: Temp_Heat_Sink_Middle
+        AnIn:
+          mag:
+            double-field-type: mapped
+            source-type: analog
+            index: 39
+            scale: 1
+          q:
+            quality-field-type: ignored
+          t:
+            timestamp-field-type: ignored
+          units:
+            multiplier:
+              value:
+                enum-field-type: ignored
+            SIUnit:
+              enum-field-type: constant
+              value: UnitSymbolKind_degC
+        Phase:
+          value:
+            enum-field-type: ignored
+      - logicalNode:
+          identifiedObject:
+            description:
+              value:
+                string-field-type: constant
+                value: Temperature Sensor Ambient Bottom
+            mRID:
+              value:
+                string-field-type: ignored
+            name:
+              value:
+                string-field-type: constant
+                value: Temp_Ambient_Bottom
+        AnIn:
+          mag:
+            double-field-type: mapped
+            source-type: analog
+            index: 40
+            scale: 1
+          q:
+            quality-field-type: ignored
+          t:
+            timestamp-field-type: ignored
+          units:
+            multiplier:
+              value:
+                enum-field-type: ignored
+            SIUnit:
+              enum-field-type: constant
+              value: UnitSymbolKind_degC
+        Phase:
+          value:
+            enum-field-type: ignored
+      - logicalNode:
+          identifiedObject:
+            description:
+              value:
+                string-field-type: constant
+                value: Temperature Sensor CMS Board
+            mRID:
+              value:
+                string-field-type: ignored
+            name:
+              value:
+                string-field-type: constant
+                value: Temp_CMS_Board
+        AnIn:
+          mag:
+            double-field-type: mapped
+            source-type: analog
+            index: 41
+            scale: 1
+          q:
+            quality-field-type: ignored
+          t:
+            timestamp-field-type: ignored
+          units:
+            multiplier:
+              value:
+                enum-field-type: ignored
+            SIUnit:
+              enum-field-type: constant
+              value: UnitSymbolKind_degC
+        Phase:
+          value:
+            enum-field-type: ignored
+      - logicalNode:
+          identifiedObject:
+            description:
+              value:
+                string-field-type: constant
+                value: Temperature Sensor Cold Plate Top
+            mRID:
+              value:
+                string-field-type: ignored
+            name:
+              value:
+                string-field-type: constant
+                value: Temp_Cold_Plate_Top
+        AnIn:
+          mag:
+            double-field-type: mapped
+            source-type: analog
+            index: 42
+            scale: 1
+          q:
+            quality-field-type: ignored
+          t:
+            timestamp-field-type: ignored
+          units:
+            multiplier:
+              value:
+                enum-field-type: ignored
+            SIUnit:
+              enum-field-type: constant
+              value: UnitSymbolKind_degC
+        Phase:
+          value:
+            enum-field-type: ignored
+      - logicalNode:
+          identifiedObject:
+            description:
+              value:
+                string-field-type: constant
+                value: Temperature Sensor Gate Drive Top
+            mRID:
+              value:
+                string-field-type: ignored
+            name:
+              value:
+                string-field-type: constant
+                value: Temp_Gate_Drive_Top
+        AnIn:
+          mag:
+            double-field-type: mapped
+            source-type: analog
+            index: 42
+            scale: 1
+          q:
+            quality-field-type: ignored
+          t:
+            timestamp-field-type: ignored
+          units:
+            multiplier:
+              value:
+                enum-field-type: ignored
+            SIUnit:
+              enum-field-type: constant
+              value: UnitSymbolKind_degC
+        Phase:
+          value:
+            enum-field-type: ignored
+      - logicalNode:
+          identifiedObject:
+            description:
+              value:
+                string-field-type: constant
+                value: Temperature Sensor i.MX6 CPU
+            mRID:
+              value:
+                string-field-type: ignored
+            name:
+              value:
+                string-field-type: constant
+                value: Temp_iMX6_CPU
+        AnIn:
+          mag:
+            double-field-type: mapped
+            source-type: analog
+            index: 44
+            scale: 1
+          q:
+            quality-field-type: ignored
+          t:
+            timestamp-field-type: ignored
+          units:
+            multiplier:
+              value:
+                enum-field-type: ignored
+            SIUnit:
+              enum-field-type: constant
+              value: UnitSymbolKind_degC
+        Phase:
+          value:
+            enum-field-type: ignored
+      booleaneventandstatusggio:
+      - logicalNode:
+          identifiedObject:
+            description:
+              value:
+                string-field-type: ignored
+            mRID:
+              value:
+                string-field-type: ignored
+            name:
+              value:
+                string-field-type: ignored
+        Ind:
+          q:
+            quality-field-type: ignored
+          stVal:
+            bool-field-type: mapped
+          t:
+            timestamp-field-type: ignored
+        Phase:
+          value:
+            enum-field-type: ignored
+      integereventandstatusggio:
+      - logicalNode:
+          identifiedObject:
+            description:
+              value:
+                string-field-type: constant
+                value: Power factor correction on/off (1>=on)
+            mRID:
+              value:
+                string-field-type: ignored
+            name:
+              value:
+                string-field-type: constant
+                value: pfc_flag
+        IntIn:
+          q:
+            quality-field-type: ignored
+          stVal:
+            int32-field-type: mapped
+            source-type: analog
+            index: 1
+            scale: 1
+          t:
+            timestamp-field-type: ignored
+          units:
+            multiplier:
+              value:
+                enum-field-type: ignored
+            SIUnit:
+              enum-field-type: ignored
+        Phase:
+          value:
+            enum-field-type: ignored
+      stringeventandstatusggio:
+      - logicalNode:
+          identifiedObject:
+            description:
+              value:
+                string-field-type: ignored
+            mRID:
+              value:
+                string-field-type: ignored
+            name:
+              value:
+                string-field-type: ignored
+        Phase:
+          value:
+            enum-field-type: ignored
+        StrIn:
+          q:
+            quality-field-type: ignored
+          stVal:
+            string-field-type: mapped
+          t:
+            timestamp-field-type: ignored
+...
